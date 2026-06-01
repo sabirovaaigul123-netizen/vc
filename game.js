@@ -11,7 +11,7 @@
     try {
         highScore = parseInt(localStorage.getItem('flappyDinoHigh') || '0', 10) || 0;
     } catch (e) { /* localStorage недоступен */ }
-    highScoreEl.textContent = highScore;
+    if (highScoreEl) highScoreEl.textContent = highScore;
 
     let audioCtx = null;
     function ensureAudio() {
@@ -414,12 +414,9 @@
         ctx.font = 'bold 38px "Segoe UI", Arial, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('FLAPPY DINO', W / 2, H / 2 - 80);
-        ctx.font = '20px "Segoe UI", Arial, sans-serif';
-        ctx.fillText('ЛКМ или Пробел', W / 2, H / 2 - 30);
-        ctx.fillText('чтобы взмахнуть крыльями', W / 2, H / 2 - 5);
-        ctx.font = '16px "Segoe UI", Arial, sans-serif';
-        ctx.fillText('Пробел — рестарт после проигрыша', W / 2, H / 2 + 30);
+        ctx.fillText('FLAPPY DINO', W / 2, H / 2 - 50);
+        ctx.font = 'bold 22px "Segoe UI", Arial, sans-serif';
+        ctx.fillText('Нажми ПРОБЕЛ или ЛКМ, чтобы начать', W / 2, H / 2 + 10);
     }
 
     function drawGameOver() {
@@ -461,7 +458,7 @@
         if (score > highScore) {
             highScore = score;
             try { localStorage.setItem('flappyDinoHigh', String(highScore)); } catch (e) {}
-            highScoreEl.textContent = highScore;
+            if (highScoreEl) highScoreEl.textContent = highScore;
         }
     }
 
